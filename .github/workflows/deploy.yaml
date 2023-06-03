@@ -3,7 +3,7 @@ name: Deploy App and Notify
 on:
   push:
     branches:
-      - master
+      - main
     
 jobs:
   deploy-app:
