@@ -20,15 +20,14 @@ jobs:
     needs: [deploy-app]
     if: always()
     steps:
-      - uses: martialonline/workflow-status@v3
-        id: check
+      - uses: technote-space/workflow-conclusion-action@v3
       - name: Send notification
         id: notification
         uses: slackapi/slack-github-action@v1.24.0
         with:
           payload: |
             {
-              "text": "GitHub Action build result: ${{ steps.check.outputs.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "text": "GitHub Action build result: ${{ env.WORKFLOW_CONCLUSION }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
               "blocks": [
                 {
                   "type": "section",
