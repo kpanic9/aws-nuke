@@ -33,7 +33,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "GitHub Action build result"
+                    "text": "Job Status: ${{ needs.deploy-app.result }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Actor: ${{ github.actor }}"
                   }
                 }
               ]
