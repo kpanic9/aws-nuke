@@ -27,7 +27,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "GitHub Action build result: ${{ env.WORKFLOW_CONCLUSION }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "text": "GitHub Action build result: ${{ needs.deploy-app.result }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
               "blocks": [
                 {
                   "type": "section",
