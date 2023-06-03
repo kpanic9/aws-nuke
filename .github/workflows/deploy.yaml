@@ -27,8 +27,28 @@ jobs:
         with:
           payload: |
             {
-              "text": "GitHub Action build result: ${{ needs.deploy-app.result }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
               "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "=================================================="
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Git Repository: ${{ github.repository }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Workflow: ${{ github.workflow }}"
+                  }
+                },
                 {
                   "type": "section",
                   "text": {
@@ -40,9 +60,30 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
+                    "text": "Run Number: ${{ github.run_number }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
                     "text": "Actor: ${{ github.actor }}"
                   }
-                }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Commits: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "=================================================="
+                  }
+                },
               ]
             }
         env:
