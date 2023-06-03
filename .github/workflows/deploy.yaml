@@ -9,7 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy
-        run: echo "Deploying app..."
+        run: |
+          echo "Deploying app..."
+          exit 1
 
   slack-notification:
     runs-on: ubuntu-latest
