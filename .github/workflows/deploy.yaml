@@ -20,73 +20,86 @@ jobs:
     needs: [deploy-app]
     if: always()
     steps:
-      - uses: technote-space/workflow-conclusion-action@v3
-      - name: Send notification
-        id: notification
-        uses: slackapi/slack-github-action@v1.24.0
+      - uses: 8398a7/action-slack@v3
         with:
-          payload: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "=================================================="
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Git Repository: ${{ github.repository }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Workflow: ${{ github.workflow }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Job Status: ${{ needs.deploy-app.result }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Run Number: ${{ github.run_number }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Actor: ${{ github.actor }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Commits: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "=================================================="
-                  }
-                }
-              ]
-            }
+          status: ${{ needs.deploy-app.result }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      
+  
+  
+#     runs-on: ubuntu-latest
+#     needs: [deploy-app]
+#     if: always()
+#     steps:
+#       - uses: technote-space/workflow-conclusion-action@v3
+#       - name: Send notification
+#         id: notification
+#         uses: slackapi/slack-github-action@v1.24.0
+#         with:
+#           payload: |
+#             {
+#               "blocks": [
+#                 {
+#                   "type": "section",
+#                   "text": {
+#                     "type": "mrkdwn",
+#                     "text": "=================================================="
+#                   }
+#                 },
+#                 {
+#                   "type": "section",
+#                   "text": {
+#                     "type": "mrkdwn",
+#                     "text": "Git Repository: ${{ github.repository }}"
+#                   }
+#                 },
+#                 {
+#                   "type": "section",
+#                   "text": {
+#                     "type": "mrkdwn",
+#                     "text": "Workflow: ${{ github.workflow }}"
+#                   }
+#                 },
+#                 {
+#                   "type": "section",
+#                   "text": {
+#                     "type": "mrkdwn",
+#                     "text": "Job Status: ${{ needs.deploy-app.result }}"
+#                   }
+#                 },
+#                 {
+#                   "type": "section",
+#                   "text": {
+#                     "type": "mrkdwn",
+#                     "text": "Run Number: ${{ github.run_number }}"
+#                   }
+#                 },
+#                 {
+#                   "type": "section",
+#                   "text": {
+#                     "type": "mrkdwn",
+#                     "text": "Actor: ${{ github.actor }}"
+#                   }
+#                 },
+#                 {
+#                   "type": "section",
+#                   "text": {
+#                     "type": "mrkdwn",
+#                     "text": "Commits: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+#                   }
+#                 },
+#                 {
+#                   "type": "section",
+#                   "text": {
+#                     "type": "mrkdwn",
+#                     "text": "=================================================="
+#                   }
+#                 }
+#               ]
+#             }
+#         env:
+#           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
