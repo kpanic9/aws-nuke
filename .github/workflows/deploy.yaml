@@ -1,0 +1,16 @@
+name: Deploy App and Notify
+
+on:
+  push:
+    
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy
+        run: echo "Deploying app"
+
+
+
+
